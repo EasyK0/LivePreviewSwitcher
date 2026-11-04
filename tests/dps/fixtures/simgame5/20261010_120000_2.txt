@@ -1,0 +1,10 @@
+------------------------------------------------------------
+  Gamelog
+  Listener: Pilot B
+  Session Started: x
+------------------------------------------------------------
+[ 2026.10.10 20:02:04 ] (combat) <color=0xff00ffff><b>5000</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:06 ] (combat) <color=0xff00ffff><b>5000</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:49 ] (combat) <color=0xff00ffff><b>1000</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:51 ] (combat) <color=0xff00ffff><b>1000</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:53 ] (combat) <color=0xff00ffff><b>1000</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits

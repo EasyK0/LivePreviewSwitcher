@@ -1,0 +1,2 @@
+# The scripts are embedded into the exe as LF text; never convert line endings
+* -text

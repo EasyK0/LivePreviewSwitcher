@@ -1,0 +1,66 @@
+# LivePreviewSwitcher
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/EasyK0/LivePreviewSwitcher)](https://github.com/EasyK0/LivePreviewSwitcher/releases)
+
+An extended build of **[EVE-X-Preview](https://github.com/g0nzo83/EVE-X-Preview)**, the AutoHotkey v2 multiboxing helper for EVE Online. It shows a live thumbnail of every game client (through Windows DWM), switches clients with hotkeys, minimizes inactive clients and keeps per-profile layouts. This build adds per-character **solar system** and **live DPS** on the thumbnails, plus a set of performance and reliability fixes.
+
+Based on EVE-X-Preview v1.0.4 by **g0nzo83**, MIT-licensed. All credit for the original program goes to its author.
+
+## What's added
+
+| Variant | Additions |
+|---|---|
+| **High** | Runs at High process priority, so thumbnails and switching stay smooth with many clients open |
+| **Systems** | Each thumbnail shows the character's current solar system, read from the Local chat logs. Faster window search, title parsing only on change, immediate reaction to foreground changes |
+| **Ultimate** | Live DPS per character on its thumbnail, read from the combat logs. Active-client border drawn by reshaping one window instead of showing/hiding several (≈0.6 ms instead of 5–23 ms). Thumbnail updates spread across ticks. More reliable client activation |
+| **Test** | Ultimate plus a diagnostic log (`EVE-X-diag.log` in the `EVE-X Build` folder, or next to the exe) and a black-X-on-white icon. The variant for experiments and the only one that writes a log; new changes are tried here first |
+
+### Live DPS from combat logs
+
+The DPS counter tails every character's `Documents\EVE\logs\Gamelogs` file and averages outgoing damage over the current fight. A gap of more than 20 s starts a new fight, and the overlay hides when the fight ends. It handles the awkward parts of tailing a live log: half-written lines, hits logged out of order, several weapon groups landing in the same second, incoming damage and misses (ignored), and skipping old history at startup. Each of these is covered by a test.
+
+## Fair play
+
+Like the original, this tool **does not send input to the game for you**. There is no key or mouse broadcasting and no automation: one hotkey brings one client to the front, which is how EVE window-preview tools are expected to work. It reads only the game's own log files. It doesn't use the network or the registry, doesn't start other programs, and only writes its own `EVE-X-Preview.json` settings file (plus the diagnostic log in the Test variant).
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `upstream/` | The original EVE-X-Preview 1.0.4 script, untouched, and its [license](upstream/LICENSE) |
+| `src/EVE-X-Preview.ahk` | The script the variants start from |
+| `build/classes/` | The added classes: `gamelog_class.ahk` (DPS), `system_class2.ahk` (systems), `classes_ult.ahk` (Ultimate) |
+| `build/legacy/` | Build scripts. Each applies exact, asserted patches to the script inside the original exe and swaps in recolored icons |
+| `tests/dps/` | DPS counter tests and replay of a recorded fight, with fixtures (made-up names) |
+| `tools/` | Syntax check, load generator, process monitor, diagnostic log summary |
+
+The base script is the `RCDATA #1` resource of the official `EVE-X-Preview.exe` 1.0.4 release (SHA-256 `10E04F3620F7AD3EFD8A21C930E9AE97E7A15FC31D21170C74836DE48A174CB8`).
+
+## Building
+
+Requires Python with `pefile` and `Pillow`. The input is always the original `EVE-X-Preview.exe` 1.0.4:
+
+```
+python build\legacy\build_ult4.py  <original exe> dist\EVE-X-Preview-Ultimate.exe 0.995 build\classes\classes_ult.ahk
+python build\legacy\build8.py      <original exe> dist\EVE-X-Preview-Systems.exe  0.34  build\classes\system_class2.ahk
+python build\legacy\buildexe.py    <original exe> dist\EVE-X-Preview-High.exe
+python build\legacy\build_diag7.py <original exe> dist\EVE-X-Preview-Test.exe     mono  build\classes\classes_ult.ahk
+```
+
+Every patch asserts that its target text appears exactly once, so a build fails loudly rather than producing a half-patched script. Verified on 2026-10-10: `build_ult4.py` and `build8.py` reproduce the scripts inside the released Ultimate and Systems executables byte for byte. The scripts patch the original, not `src/`. A single build script for all variants is planned.
+
+## Tests
+
+- **Syntax check:** `powershell -File tools\validate.ps1 src\EVE-X-Preview.ahk`
+- **DPS counter:** `AutoHotkey64.exe tests\dps\gamesim2.ahk <empty folder>` writes simulated combat logs and checks 13 cases. Expected output: `tests/dps/fixtures/simgame5/result.txt`.
+- **Replay a recorded fight:** `AutoHotkey64.exe tests\dps\replay_new.ahk tests\dps\fixtures\replay\20261010_120000_1.txt <empty folder> 3 new-delay3` takes about 70 s. Expected output: `tests/dps/fixtures/replay/replay.txt`.
+- **Load test:** `powershell -File tools\loadgen.ps1 -Chars 14 -Names <client names>` writes combat logs for a running preview and removes them afterwards. Meanwhile, `tools\monitor.ps1 -ProcId <pid>` logs CPU, memory, handles and hung or error windows.
+
+## Requirements
+
+Windows 10/11 and AutoHotkey v2 (tested with 2.0.21).
+
+## License
+
+[MIT](LICENSE), like the original. EVE Online is a trademark of CCP hf. This project is not affiliated with or endorsed by CCP.

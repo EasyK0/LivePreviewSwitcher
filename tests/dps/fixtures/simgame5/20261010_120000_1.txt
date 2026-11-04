@@ -1,0 +1,17 @@
+------------------------------------------------------------
+  Gamelog
+  Listener: Pilot A
+  Session Started: x
+------------------------------------------------------------
+[ 2026.10.10 20:03:01 ] (combat) <color=0xff00ffff><b>9999</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:03:03 ] (combat) <color=0xff00ffff><b>9999</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:52 ] (combat) <color=0xff00ffff><b>1490</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:54 ] (combat) <color=0xff00ffff><b>1490</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:56 ] (combat) <color=0xff00ffff><b>1490</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:58 ] (combat) <color=0xff00ffff><b>1490</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:03:00 ] (combat) <color=0xff00ffff><b>1490</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:03:01 ] (combat) <color=0xffcc0000><b>400</b> <color=0x77ffffff><font size=10>from</font> <b>Rat</b> - Hits
+[ 2026.10.10 20:03:01 ] (combat) Your Heavy Assault Missile misses Rat completely
+[ 2026.10.10 20:03:02 ] (combat) <color=0xff00ffff><b>1490</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:02:24 ] (combat) <color=0xff00ffff><b>50000</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits
+[ 2026.10.10 20:03:04 ] (combat) <color=0xff00ffff><b>745</b> <color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Amarr Control Tower Small</b><font size=10><color=0x77ffffff> - Scourge Rage Heavy Assault Missile - Hits

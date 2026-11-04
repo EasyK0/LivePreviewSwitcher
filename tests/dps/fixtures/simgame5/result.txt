@@ -1,0 +1,15 @@
+﻿PASS 1 history skipped                            got [] expected []
+PASS 2 single volley -> nothing yet               got [] expected []
+PASS 3 five volleys 1490 every 2 s                got [745 DPS] expected [745 DPS]
+PASS 4 incoming damage + miss ignored             got [745 DPS] expected [745 DPS]
+PASS 5 half-written line ignored                  got [745 DPS] expected [745 DPS]
+PASS 6 line completed (6 volleys, steady)         got [745 DPS] expected [745 DPS]
+PASS 7 out-of-order old hit ignored               got [745 DPS] expected [745 DPS]
+PASS 8 weaker volley lowers average               got [692 DPS] expected [692 DPS]
+PASS 9 gap > 20 s starts a new fight              got [500 DPS] expected [500 DPS]
+PASS 10 fight ended (silence > 20 s)              got [] expected []
+PASS 11 unknown character                         got [] expected []
+PASS 12 several lines in the same second -> wait  got [] expected []
+PASS 13 3 groups x 1000 every second              got [3000 DPS] expected [3000 DPS]
+
+13 passed, 0 failed

@@ -1,0 +1,14 @@
+# built programs and logs
+*.exe
+*.log
+dist/
+# live user config (the program rewrites it)
+EVE-X-Preview.json
+*.json.backup*
+__pycache__/
+# local tool settings and raw test output
+.claude/
+tests/results/
+# local output of the test tools
+tools/val_*.txt
+tools/loadgen_*.txt
