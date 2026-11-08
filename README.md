@@ -29,26 +29,29 @@ Like the original, this tool **does not send input to the game for you**. There 
 | Path | Contents |
 |---|---|
 | `upstream/` | The original EVE-X-Preview 1.0.4 script, untouched, and its [license](upstream/LICENSE) |
-| `src/EVE-X-Preview.ahk` | The script the variants start from |
-| `build/classes/` | The added classes: `gamelog_class.ahk` (DPS), `system_class2.ahk` (systems), `classes_ult.ahk` (Ultimate) |
-| `build/legacy/` | Build scripts. Each applies exact, asserted patches to the script inside the original exe and swaps in recolored icons |
+| `src/EVE-X-Preview.ahk` | The Ultimate script (also the base of Test) |
+| `src/EVE-X-Preview-Systems.ahk`, `src/EVE-X-Preview-High.ahk` | The Systems and High scripts |
+| `build/build.py` | One build script for all variants |
+| `build/diag_patches.py` | The Test diagnostic layer: asserted patches applied on top of the Ultimate script |
 | `tests/dps/` | DPS counter tests and replay of a recorded fight, with fixtures (made-up names) |
-| `tools/` | Syntax check, load generator, process monitor, diagnostic log summary |
+| `tools/` | Syntax check, load generator, process monitor, diagnostic log summary, `exticon.py` (exports the exe icons as PNG) |
 
 The base script is the `RCDATA #1` resource of the official `EVE-X-Preview.exe` 1.0.4 release (SHA-256 `10E04F3620F7AD3EFD8A21C930E9AE97E7A15FC31D21170C74836DE48A174CB8`).
 
 ## Building
 
-Requires Python with `pefile` and `Pillow`. The input is always the original `EVE-X-Preview.exe` 1.0.4:
+Requires Python with `pefile` and `Pillow`. The input is always the original `EVE-X-Preview.exe` 1.0.4, which is only read. One command builds High, Systems, Ultimate and Test into `dist\` and copies the changed exes into the folder with the original exe:
 
 ```
-python build\legacy\build_ult4.py  <original exe> dist\EVE-X-Preview-Ultimate.exe 0.995 build\classes\classes_ult.ahk
-python build\legacy\build8.py      <original exe> dist\EVE-X-Preview-Systems.exe  0.34  build\classes\system_class2.ahk
-python build\legacy\buildexe.py    <original exe> dist\EVE-X-Preview-High.exe
-python build\legacy\build_diag7.py <original exe> dist\EVE-X-Preview-Test.exe     mono  build\classes\classes_ult.ahk
+python build\build.py --target <folder with the original exe>
 ```
 
-Every patch asserts that its target text appears exactly once, so a build fails loudly rather than producing a half-patched script. Verified on 2026-10-10: `build_ult4.py` and `build8.py` reproduce the scripts inside the released Ultimate and Systems executables byte for byte. The scripts patch the original, not `src/`. A single build script for all variants is planned.
+- `python build\build.py Test`: only the named variants.
+- `python build\build.py --no-install`: build into `dist\` only, no copy.
+- `--target` defaults to an `EVE-X` folder next to the repository folder.
+- A running exe cannot be replaced: the script reports it, close the program and run it again.
+
+Each exe is the original with its script (`RCDATA #1`) swapped for the one in `src/` and recolored icons. Test is the Ultimate script plus the patches in `build/diag_patches.py` and a black-X-on-white icon; it is the only variant that writes `EVE-X-diag.log`. A change in `src/EVE-X-Preview.ahk` therefore reaches Ultimate and Test at once. Every patch asserts that its target text appears exactly once, so a build fails loudly rather than producing a half-patched script.
 
 ## Tests
 
