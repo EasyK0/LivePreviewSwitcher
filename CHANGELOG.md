@@ -4,6 +4,8 @@ All notable changes to LivePreviewSwitcher. Adding a new version at the top publ
 
 ## [Unreleased]
 
+- `build/build.py`: one build script for all variants (`python build\build.py [High Systems Ultimate Test] [--target <folder with the original exe>] [--no-install]`), with English help and messages. Each exe is the original `EVE-X-Preview.exe` with the script from `src/` swapped in and recolored icons; a variant that cannot be replaced because it is running is reported. The Test diagnostic layer is now a list of asserted patches in `build/diag_patches.py`, applied on top of the Ultimate script, so a change in `src/EVE-X-Preview.ahk` reaches Ultimate and Test at once.
+- `src/EVE-X-Preview-High.ahk` and `src/EVE-X-Preview-Systems.ahk`: full scripts of those variants. `build/legacy/` and `build/classes/` removed; `exticon.py` moved to `tools/`.
 - Test variant (`build/legacy/build_diag7.py`): passing `mono` instead of a hue gives a black X on a white background for every icon group, tray icons included, so the experimental build is easy to tell apart. Its diagnostic log `EVE-X-diag.log` goes to the `EVE-X Build` folder next to the program when that folder exists, otherwise next to the exe.
 - README: Test variant added to the variant table; its build command now makes `EVE-X-Preview-Test.exe` with the `mono` icon.
 - MIT license for the whole repository (original copyright kept) and the upstream license in `upstream/LICENSE`.
