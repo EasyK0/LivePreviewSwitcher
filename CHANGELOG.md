@@ -4,6 +4,7 @@ All notable changes to LivePreviewSwitcher. Adding a new version at the top publ
 
 ## [Unreleased]
 
+- `tools/tester3.ahk`: rapid switching tester. It clicks random thumbnails of a running preview at a fixed interval and measures how long until that client is in front and its border is visible (avg, median, p90, max), and reports missed switches with what was in front instead. `tools/rapid.ps1` runs it for several exes in a row with a copy of your settings (settings file, profile and AutoHotkey path are parameters). Tester output is git-ignored.
 - README: build section for `build/build.py` (one command, `--target`, `--no-install`, running exe reported) and the new repository layout.
 - `build/build.py`: one build script for all variants (`python build\build.py [High Systems Ultimate Test] [--target <folder with the original exe>] [--no-install]`), with English help and messages. Each exe is the original `EVE-X-Preview.exe` with the script from `src/` swapped in and recolored icons; a variant that cannot be replaced because it is running is reported. The Test diagnostic layer is now a list of asserted patches in `build/diag_patches.py`, applied on top of the Ultimate script, so a change in `src/EVE-X-Preview.ahk` reaches Ultimate and Test at once.
 - `src/EVE-X-Preview-High.ahk` and `src/EVE-X-Preview-Systems.ahk`: full scripts of those variants. `build/legacy/` and `build/classes/` removed; `exticon.py` moved to `tools/`.

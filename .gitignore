@@ -12,3 +12,7 @@ tests/results/
 # local output of the test tools
 tools/val_*.txt
 tools/loadgen_*.txt
+# working output of the switching tester
+tools/rapid_*/
+tools/rapid_result.txt
+tools/re.txt
