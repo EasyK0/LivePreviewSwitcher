@@ -59,6 +59,20 @@ Each exe is the original with its script (`RCDATA #1`) swapped for the one in `s
 - **DPS counter:** `AutoHotkey64.exe tests\dps\gamesim2.ahk <empty folder>` writes simulated combat logs and checks 13 cases. Expected output: `tests/dps/fixtures/simgame5/result.txt`.
 - **Replay a recorded fight:** `AutoHotkey64.exe tests\dps\replay_new.ahk tests\dps\fixtures\replay\20261010_120000_1.txt <empty folder> 3 new-delay3` takes about 70 s. Expected output: `tests/dps/fixtures/replay/replay.txt`.
 - **Load test:** `powershell -File tools\loadgen.ps1 -Chars 14 -Names <client names>` writes combat logs for a running preview and removes them afterwards. Meanwhile, `tools\monitor.ps1 -ProcId <pid>` logs CPU, memory, handles and hung or error windows.
+- **Switching test:** with the EVE clients of a profile running, `powershell -File tools\rapid.ps1 -Exes <exe>,<exe> -Labels <name>,<name> -Config <path to EVE-X-Preview.json> -PreviewProfile <profile>` starts each build with a copy of your settings and runs `tools\tester3.ahk`: 60 clicks on random thumbnails at 166 ms and 100 ms intervals, measuring how long until the client is in front and its border is visible.
+
+### Switching baseline (2026-10-11)
+
+60 switches per run; times from the thumbnail click (median / p90 / max, in ms) and missed switches (client not in front, or border not shown, within the interval).
+
+| Build | Interval | Client in front | Missed | Border visible | Missed |
+|---|---|---|---|---|---|
+| Ultimate | 166 ms (6/s) | 24.9 / 31.1 / 110.1 | 0 | 28.5 / 31.6 / 144.1 | 0 |
+| Ultimate | 100 ms (10/s) | 24.6 / 32.0 / 77.0 | 2 | 27.8 / 32.4 / 38.5 | 3 |
+| Test v1 | 166 ms (6/s) | 27.0 / 31.7 / 38.0 | 0 | 29.9 / 34.1 / 94.7 | 0 |
+| Test v1 | 100 ms (10/s) | 24.3 / 31.7 / 90.1 | 0 | 29.4 / 32.2 / 39.4 | 2 |
+
+Both builds bring a client to the front in about 25 ms. At 10 switches per second Ultimate lost 2 of 60 (one arrived 141 ms late, one never), which is what the Test variant investigates next.
 
 ## Requirements
 
