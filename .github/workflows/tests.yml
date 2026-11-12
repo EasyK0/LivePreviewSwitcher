@@ -1,0 +1,50 @@
+name: Tests
+
+# AutoHotkey only runs on Windows: validate every script and run the DPS counter simulation.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ahk:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    env:
+      AHK_VERSION: 2.0.21
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install AutoHotkey v2 (portable zip)
+        shell: pwsh
+        run: |
+          $zip = "$env:RUNNER_TEMP\ahk.zip"
+          Invoke-WebRequest "https://github.com/AutoHotkey/AutoHotkey/releases/download/v$env:AHK_VERSION/AutoHotkey_$env:AHK_VERSION.zip" -OutFile $zip
+          Expand-Archive $zip "$env:RUNNER_TEMP\ahk"
+          "AHK=$env:RUNNER_TEMP\ahk\AutoHotkey64.exe" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Validate scripts
+        shell: pwsh
+        run: |
+          $failed = 0
+          $files = @(Get-ChildItem src\*.ahk) + @(Get-Item tests\dps\gamesim2.ahk, tests\dps\replay_new.ahk, tools\tester3.ahk)
+          foreach ($f in $files) {
+            $p = Start-Process $env:AHK -ArgumentList '/ErrorStdOut=UTF-8', '/Validate', "`"$($f.FullName)`"" -Wait -PassThru -NoNewWindow
+            if ($p.ExitCode -ne 0) { Write-Host "FAIL $($f.Name)"; $failed++ } else { Write-Host "ok   $($f.Name)" }
+          }
+          if ($failed) { exit 1 }
+
+      - name: DPS counter simulation
+        shell: pwsh
+        run: |
+          $out = New-Item -ItemType Directory "$env:RUNNER_TEMP\simgame"
+          $p = Start-Process $env:AHK -ArgumentList '/ErrorStdOut=UTF-8', 'tests\dps\gamesim2.ahk', "`"$out`"" -Wait -PassThru -NoNewWindow
+          if ($p.ExitCode -ne 0) { Write-Host "gamesim2 exit $($p.ExitCode)"; exit 1 }
+          $got = Get-Content "$out\result.txt" -Encoding utf8
+          $want = Get-Content tests\dps\fixtures\simgame5\result.txt -Encoding utf8
+          $got
+          if (Compare-Object $got $want) { Write-Host "Result differs from tests/dps/fixtures/simgame5/result.txt"; exit 1 }
