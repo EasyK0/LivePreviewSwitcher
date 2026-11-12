@@ -1,5 +1,6 @@
 # LivePreviewSwitcher
 
+[![Tests](https://github.com/EasyK0/LivePreviewSwitcher/actions/workflows/tests.yml/badge.svg)](https://github.com/EasyK0/LivePreviewSwitcher/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/EasyK0/LivePreviewSwitcher)](https://github.com/EasyK0/LivePreviewSwitcher/releases)
 
@@ -54,6 +55,8 @@ python build\build.py --target <folder with the original exe>
 Each exe is the original with its script (`RCDATA #1`) swapped for the one in `src/` and recolored icons. Test is the Ultimate script plus the patches in `build/diag_patches.py` and a black-X-on-white icon; it is the only variant that writes `EVE-X-diag.log`. A change in `src/EVE-X-Preview.ahk` therefore reaches Ultimate and Test at once. Every patch asserts that its target text appears exactly once, so a build fails loudly rather than producing a half-patched script.
 
 ## Tests
+
+GitHub Actions runs the syntax check on every script and the DPS counter test on a Windows runner for each push and pull request (`.github/workflows/tests.yml`).
 
 - **Syntax check:** `powershell -File tools\validate.ps1 src\EVE-X-Preview.ahk`
 - **DPS counter:** `AutoHotkey64.exe tests\dps\gamesim2.ahk <empty folder>` writes simulated combat logs and checks 13 cases. Expected output: `tests/dps/fixtures/simgame5/result.txt`.
