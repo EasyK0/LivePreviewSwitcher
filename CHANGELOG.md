@@ -4,6 +4,7 @@ All notable changes to LivePreviewSwitcher. Adding a new version at the top publ
 
 ## [Unreleased]
 
+- `SECURITY.md`: supported versions, what the program reads and writes, how to report a security problem without posting details publicly, and what is never committed.
 - Tests workflow (`.github/workflows/tests.yml`): on every push and pull request a Windows runner installs AutoHotkey 2.0.21, validates `src/*.ahk`, `tests/dps/gamesim2.ahk`, `tests/dps/replay_new.ahk` and `tools/tester3.ahk`, and runs the DPS counter simulation, whose output must match `tests/dps/fixtures/simgame5/result.txt`. README: Tests badge and a note that CI runs these checks.
 - README: switching test command and the 2026-10-11 baseline for Ultimate and Test v1 (time to foreground and border, missed switches).
 - `tools/tester3.ahk`: rapid switching tester. It clicks random thumbnails of a running preview at a fixed interval and measures how long until that client is in front and its border is visible (avg, median, p90, max), and reports missed switches with what was in front instead. `tools/rapid.ps1` runs it for several exes in a row with a copy of your settings (settings file, profile and AutoHotkey path are parameters). Tester output is git-ignored.
