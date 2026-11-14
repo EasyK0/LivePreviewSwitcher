@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Original EVE-X-Preview
+    url: https://github.com/g0nzo83/EVE-X-Preview
+    about: Problems that also happen in the original program can be reported there.

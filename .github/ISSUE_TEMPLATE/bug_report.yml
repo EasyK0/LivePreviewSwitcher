@@ -1,0 +1,41 @@
+name: Bug report
+description: Something in a build doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please don't paste real character names, full log files or your `EVE-X-Preview.json`. Replace names with placeholders such as `Pilot A`.
+  - type: dropdown
+    id: variant
+    attributes:
+      label: Variant
+      options: [High, Systems, Ultimate, Test]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Release
+      placeholder: v1.3.0
+    validations:
+      required: true
+  - type: input
+    id: setup
+    attributes:
+      label: Setup
+      description: Windows version, number of EVE clients, monitors
+      placeholder: Windows 11, 6 clients, 2 monitors
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Steps to reproduce, what you expected and what you saw
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Diagnostic log lines (Test variant only)
+      description: A few relevant lines from `EVE-X-diag.log`, names replaced
+      render: text
