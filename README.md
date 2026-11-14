@@ -81,6 +81,10 @@ Both builds bring a client to the front in about 25 ms. At 10 switches per secon
 
 Windows 10/11 and AutoHotkey v2 (tested with 2.0.21).
 
+## Contributing
+
+New changes are tried in the Test variant first; see [CONTRIBUTING.md](CONTRIBUTING.md). Security problems: [SECURITY.md](SECURITY.md).
+
 ## License
 
 [MIT](LICENSE), like the original. EVE Online is a trademark of CCP hf. This project is not affiliated with or endorsed by CCP.

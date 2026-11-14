@@ -4,6 +4,7 @@ All notable changes to LivePreviewSwitcher. Adding a new version at the top publ
 
 ## [Unreleased]
 
+- `CONTRIBUTING.md`: new changes go to the Test variant (`build/diag_patches.py`) first, checks to run before a pull request, fair-play rule and what is never committed. README: "Contributing" section linking it and `SECURITY.md`.
 - Issue templates (`.github/ISSUE_TEMPLATE/`): bug report (variant, release, setup, steps, optional Test log lines, with a reminder to replace character names) and feature request (with the no-input-broadcasting rule); a link to the original EVE-X-Preview for problems that happen there too.
 - `SECURITY.md`: supported versions, what the program reads and writes, how to report a security problem without posting details publicly, and what is never committed.
 - Tests workflow (`.github/workflows/tests.yml`): on every push and pull request a Windows runner installs AutoHotkey 2.0.21, validates `src/*.ahk`, `tests/dps/gamesim2.ahk`, `tests/dps/replay_new.ahk` and `tools/tester3.ahk`, and runs the DPS counter simulation, whose output must match `tests/dps/fixtures/simgame5/result.txt`. README: Tests badge and a note that CI runs these checks.
